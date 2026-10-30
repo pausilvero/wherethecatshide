@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Where the Cats Hide · Juego educativo de otoño</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600&family=Fondamento&family=Patrick+Hand&display=swap" rel="stylesheet">
+<style>
+:root{--wine:#22100f;--bark:#3a1b15;--rust:#b5402a;--orange:#e8742c;--ochre:#e9b44c;--leaf:#7a9a3a;--lamp:#d9e24f;--paper:#f0e3c7;--ink:#2b1a14;
+--wob:255px 15px 225px 15px/15px 225px 15px 255px;
+--head:'Fondamento',Georgia,serif;--body:'Patrick Hand','Segoe Print',system-ui,sans-serif;--hand:'Caveat','Segoe Script',cursive;color-scheme:dark;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+*,*::before,*::after{box-sizing:inherit}
+[hidden]{display:none!important}
+html{scroll-behavior:smooth;scroll-padding-top:70px}
+body{margin:0;background:var(--wine) radial-gradient(rgba(255,214,160,.06) 1px,transparent 1.5px) 0 0/22px 22px;color:var(--paper);font:1.2rem/1.55 var(--body);overflow-x:hidden}
+h1,h2,h3{font-family:var(--head);font-weight:400;line-height:1.15;margin:0 0 .6em}
+h2{font-size:clamp(2rem,4.5vw,3rem);display:inline-block;padding-bottom:.25em;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 8' preserveAspectRatio='none'%3E%3Cpath d='M0 4q12-6 25 0t25 0 25 0 25 0 25 0 25 0 25 0 25 0' fill='none' stroke='%23e9b44c' stroke-width='3' stroke-linecap='round'/%3E%3C/svg%3E") bottom/100% 8px no-repeat}
+p{margin:0 0 1em;max-width:60ch}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--lamp);outline-offset:3px}
+.wrap{width:min(1120px,100% - 2.5rem);margin-inline:auto}
+section{padding:5rem 0}
+.alt{background:var(--bark)}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:3rem;align-items:center}
+nav{position:sticky;top:env(safe-area-inset-top,0px);z-index:30;background:rgba(34,16,15,.93);backdrop-filter:blur(6px);border-bottom:2px dashed rgba(233,180,76,.35)}
+nav .wrap{display:flex;align-items:center;justify-content:space-between;gap:1rem;padding:.6rem 0}
+.logo{font:1.25rem var(--head);color:var(--ochre);text-decoration:none;white-space:nowrap}
+nav ul{display:flex;gap:1.2rem;list-style:none;margin:0;padding:0}
+nav ul a{text-decoration:none;color:#d8c3a5}nav ul a:hover{color:var(--lamp)}
+.btn{display:inline-block;font:1.2rem var(--head);background:var(--orange);color:var(--ink);text-decoration:none;padding:.7rem 1.7rem;border:3px solid var(--ink);border-radius:var(--wob);box-shadow:4px 5px 0 #7a2a14;cursor:pointer;transition:transform .15s,box-shadow .15s}
+.btn:hover{transform:translate(-2px,-2px);box-shadow:7px 8px 0 #7a2a14}
+.btn.sm{padding:.35rem 1.1rem;font-size:1rem}
+.btn.ghost{background:var(--paper)}
+/* paper */
+.sheet{position:relative;display:block;background:var(--paper);color:var(--ink);padding:.9rem .9rem 1rem;border:0;border-radius:3px 8px 4px 9px;box-shadow:0 6px 0 rgba(0,0,0,.3),0 18px 34px rgba(0,0,0,.45);transform:rotate(var(--r,-1.5deg));transition:transform .25s;margin:0;font:inherit;text-align:left}
+.sheet::before{content:"";position:absolute;top:-13px;left:50%;width:92px;height:26px;background:rgba(233,180,76,.8);transform:translateX(-50%) rotate(-3deg)}
+.sheet img{display:block;width:100%;height:auto;border-radius:2px}
+.cap,.sheet figcaption{display:block;font:600 1.4rem/1.1 var(--hand);padding-top:.55rem;color:var(--ink)}
+/* hero */
+.hero{position:relative;min-height:min(92vh,820px);display:flex;align-items:flex-end;background-color:var(--bark);background-position:25% 0;background-size:cover;background-repeat:no-repeat;overflow:hidden}
+.hero::after{content:"";position:absolute;inset:0;background:linear-gradient(0deg,var(--wine) 4%,rgba(34,16,15,.85) 32%,rgba(34,16,15,0) 64%)}
+.hero .wrap{position:relative;z-index:2;padding:0 0 3.5rem}
+.hero h1{font-size:clamp(2.4rem,7vw,4.6rem);text-shadow:0 3px 0 rgba(0,0,0,.6);margin-bottom:.3em}
+.hero p{font-size:1.35rem;max-width:46ch}
+.cta{display:flex;flex-wrap:wrap;gap:1rem;margin-top:1.4rem}
+.leaf{position:absolute;top:-40px;z-index:1;pointer-events:none;color:var(--c);animation:fall linear infinite}
+.leaf svg{width:100%;height:100%;fill:currentColor}
+@keyframes fall{to{transform:translate(var(--dx),105vh) rotate(480deg)}}
+/* alice */
+.tags{display:flex;flex-wrap:wrap;gap:.7rem;list-style:none;margin:1.2rem 0 0;padding:0}
+.tags li{padding:.3rem 1rem;border-radius:var(--wob);color:var(--ink);background:var(--ochre);transform:rotate(-2deg)}
+.tags li:nth-child(even){background:var(--orange);transform:rotate(1.6deg)}
+.tags li:nth-child(3n){background:var(--leaf)}
+.pair{display:grid;grid-template-columns:1.5fr 1fr;gap:1.6rem;align-items:center}
+/* gallery */
+.chips{display:flex;flex-wrap:wrap;gap:.6rem;margin:1.6rem 0 2.4rem}
+.chips button,.tabs button{font:1.1rem var(--body);background:transparent;color:var(--paper);border:2px solid var(--ochre);padding:.3rem 1.2rem;border-radius:var(--wob);cursor:pointer}
+.chips button[aria-pressed=true],.tabs button[aria-selected=true]{background:var(--ochre);color:var(--ink)}
+.grid{column-count:3;column-gap:1.8rem}
+.grid .sheet{width:100%;break-inside:avoid;margin-bottom:2rem;cursor:zoom-in}
+.grid .sheet:hover{transform:rotate(0) scale(1.03);z-index:2}
+dialog{border:0;background:var(--paper);color:var(--ink);padding:1rem;max-width:min(92vw,900px);border-radius:6px;box-shadow:0 20px 60px #000}
+dialog::backdrop{background:rgba(15,5,5,.88)}
+dialog img{display:block;max-width:100%;max-height:70vh;margin:0 auto}
+dialog figcaption{font:1.3rem var(--hand);padding:.7rem 0}
+/* levels */
+.tabs{display:flex;flex-wrap:wrap;gap:.6rem;margin:1.6rem 0}
+.panel{background:var(--paper) repeating-linear-gradient(transparent 0 33px,rgba(150,90,60,.28) 33px 34px);color:var(--ink);line-height:34px;border-radius:4px 10px 6px 12px;padding:1.6rem 2rem;display:grid;grid-template-columns:1.2fr 1fr;gap:2.5rem;box-shadow:0 8px 0 rgba(0,0,0,.3)}
+.panel h3{color:var(--rust);font-size:1.7rem;line-height:1.3}
+.panel h4{margin:0;font:600 1.5rem var(--hand);color:var(--leaf);filter:brightness(.7)}
+.panel p{margin:0 0 .5rem;line-height:34px}
+/* robot */
+.steps{counter-reset:s;list-style:none;margin:0;padding:1.6rem;border:3px dashed var(--leaf);border-radius:14px}
+.steps li{counter-increment:s;display:flex;gap:1rem;margin-bottom:1rem}.steps li:last-child{margin:0}
+.steps li::before{content:counter(s);flex:none;width:2.2rem;height:2.2rem;display:grid;place-items:center;border-radius:50%;background:var(--leaf);color:var(--ink);font:1.1rem var(--head)}
+/* data */
+.bars{display:grid;gap:1.2rem;margin-top:2rem;max-width:820px}
+.bar .t{display:flex;justify-content:space-between;gap:1rem;margin-bottom:.3rem}
+.bar .t b{color:var(--ochre);font:600 1.5rem var(--hand)}
+.track{height:20px;border-radius:12px 5px 12px 6px;background:rgba(240,227,199,.12)}
+.fill{height:100%;width:0;border-radius:12px 5px 12px 6px;background:linear-gradient(90deg,var(--rust),var(--orange),var(--ochre));transition:width 1.2s cubic-bezier(.2,.8,.2,1)}
+.note{color:#d8c3a5;margin-top:1.6rem;font-size:1.05rem}
+/* team */
+.team{display:grid;grid-template-columns:repeat(4,1fr);gap:1.6rem;margin-top:2.6rem}
+.team .sheet{text-align:center;padding-top:1.4rem}
+.team .sheet:nth-child(even){--r:1.5deg}
+.av{width:110px;height:110px;margin:0 auto .9rem;border-radius:50%;display:grid;place-items:center;font:2rem var(--head);color:var(--ink);overflow:hidden;border:4px solid var(--ink);box-shadow:3px 4px 0 var(--rust)}
+.av img{width:100%;height:100%;object-fit:cover}
+.team h3{font-size:1.1rem;margin-bottom:.3rem}
+.team p{font-size:1rem;margin:0 auto}
+.tools{display:flex;flex-wrap:wrap;gap:.6rem;margin-top:2.6rem}
+.tools span{border:2px dashed var(--leaf);color:var(--lamp);padding:.2rem .9rem;border-radius:var(--wob)}
+/* download */
+#descargar{background:radial-gradient(circle at 25% 60%,#6a2a10 0%,var(--wine) 65%)}
+.big{font-size:1.5rem;padding:.9rem 2.4rem}
+footer{background:#150909;padding:2.5rem 0;color:#cdb99b;text-align:center;font-size:1rem}
+footer p{margin:.3rem auto}
+@media(max-width:900px){nav ul{display:none}.two,.panel{grid-template-columns:1fr}.grid{column-count:2}.team{grid-template-columns:1fr 1fr}.hero{background-position:20% 0}section{padding:3.5rem 0}.panel{padding:1.2rem}}
+@media(max-width:560px){.grid{column-count:1}.team,.pair{grid-template-columns:1fr}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.leaf{display:none}}
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><symbol id="m" viewBox="0 0 24 24"><path d="M12 1l2.4 5 3.2-1.8-.8 5.4 5.2-.6-3.6 4 3.2 3.4-5.2-.4-.4 3.4-3.4-.2-.2 4.8h-2.8l-.2-4.8-3.4.2-.4-3.4-5.2.4 3.2-3.4-3.6-4 5.2.6-.8-5.4L9.6 6z"/></symbol></svg>
+
+<nav><div class="wrap">
+ <a class="logo" href="#inicio">Where the Cats Hide</a>
+ <ul><li><a href="#juego">El juego</a></li><li><a href="#alice">Alice</a></li><li><a href="#dibujos">Dibujos</a></li><li><a href="#niveles">Niveles</a></li><li><a href="#robot">Robot</a></li><li><a href="#equipo">Equipo</a></li></ul>
+ <a class="btn sm itch" href="https://itch.io" target="_blank" rel="noopener">Descargar</a>
+</div></nav>
+
+<header class="hero" id="inicio" role="img" aria-label="Arte del juego: Alice, la bruja, con su farol en un bosque de otoño">
+ <div class="wrap">
+  <h1>Where the Cats Hide</h1>
+  <p>Un juego de puzzle para aprender jugando. Encuentra las piezas perdidas del juego de té en un bosque de otoño donde el gato se esconde.</p>
+  <div class="cta">
+   <a class="btn itch" href="https://itch.io" target="_blank" rel="noopener">Descargar en itch.io</a>
+   <a class="btn ghost" href="#dibujos">Ver los dibujos</a>
+  </div>
+ </div>
+</header>
+
+<section id="juego"><div class="wrap two">
+ <div>
+  <h2>Aprender jugando</h2>
+  <p>«Where the Cats Hide» es el proyecto final de cuatro estudiantes del Colegio Técnico y Centro de Entrenamiento Vocacional de Villarrica. Cada nivel explica una idea breve, plantea un desafío y responde al instante, sin castigar los errores.</p>
+  <p>Se hizo con Godot Engine y se complementa con un robot físico que marca pistas en el mundo real.</p>
+  <a class="btn itch" href="https://itch.io" target="_blank" rel="noopener">Jugar ahora</a>
+ </div>
+ <div class="sheet" style="--r:1.6deg">
+  <p style="margin-bottom:.5rem"><b>Género:</b> puzzle isométrico de bosque otoñal.</p>
+  <p style="margin-bottom:.5rem"><b>Estructura:</b> 4 niveles de dificultad creciente.</p>
+  <p style="margin-bottom:.5rem"><b>Pensado para:</b> estudiantes jóvenes.</p>
+  <p style="margin:0"><b>Idea central:</b> equivocarse es parte de aprender.</p>
+ </div>
+</div></section>
+
+<section id="alice" class="alt"><div class="wrap two">
+ <div class="pair">
+  <figure class="sheet" style="--r:-2deg"><img data-img="k4" alt="Hoja de diseño de Alice the Witch, a lápiz, con anotaciones"><figcaption>Hoja de diseño de Alice</figcaption></figure>
+  <figure class="sheet" style="--r:2.2deg"><img data-img="k5" alt="Alice con vestido naranja y una calabaza, en marcador"><figcaption>Alice en color</figcaption></figure>
+ </div>
+ <div>
+  <h2>Conoce a Alice</h2>
+  <p>Alice the Witch es la protagonista. Recorre el bosque con su farol, y cada prenda de su diseño sale del otoño:</p>
+  <ul class="tags"><li>Sombrero de hojas de arce</li><li>Poncho de algodón oscuro</li><li>Falda de cuero</li><li>Pañuelo de crochet</li><li>Cabello esponjado con coletas y cintitas</li><li>Pulseras y banda de hilos</li><li>Botas de cuero marrones</li></ul>
+ </div>
+</div></section>
+
+<section id="dibujos"><div class="wrap">
+ <h2>El cuaderno de dibujos</h2>
+ <p>Todo el arte del juego se dibujó a mano, en lápiz y marcador. Toca un dibujo para verlo grande.</p>
+ <div class="chips" id="chips"></div>
+ <div class="grid" id="grid"></div>
+</div></section>
+
+<dialog id="lb"><figure style="margin:0"><img alt=""><figcaption></figcaption></figure><button class="btn sm" id="x">Cerrar</button></dialog>
+
+<section id="niveles" class="alt"><div class="wrap">
+ <h2>Cuatro niveles</h2>
+ <div class="tabs" role="tablist" aria-label="Niveles del juego"></div>
+ <div class="panel" id="panel" role="tabpanel" aria-live="polite"></div>
+</div></section>
+
+<section id="robot"><div class="wrap two">
+ <div>
+  <h2>Un robot que señala el camino</h2>
+  <p>El robot LEGO Mindstorms EV3, programado en MicroPython, sigue una trayectoria con su sensor de color y detecta el camino correcto con su giroscopio. Esa pista física es la que el estudiante replica en el juego.</p>
+  <p>Hoy el estudiante lleva la pista del robot al juego. Conectarlos de forma automática es la próxima mejora planeada.</p>
+ </div>
+ <ol class="steps">
+  <li>El robot recorre su trayectoria y detecta el camino con sus sensores.</li>
+  <li>Señala una pista en el espacio real.</li>
+  <li>El estudiante la interpreta y la lleva al juego.</li>
+  <li>Resuelve el puzzle y desbloquea el siguiente nivel.</li>
+ </ol>
+</div></section>
+
+<section id="equipo" class="alt"><div class="wrap">
+ <h2>El equipo</h2>
+ <p>Cuatro integrantes, un solo proyecto.</p>
+ <div class="team" id="team"></div>
+ <div class="tools"><span>Godot Engine</span><span>GDScript</span><span>C#</span><span>LEGO Mindstorms EV3</span><span>MicroPython</span><span>Recursos de itch.io</span></div>
+</div></section>
+
+<section id="descargar"><div class="wrap two">
+ <figure class="sheet" style="--r:-2deg"><img data-img="k2" alt="Un gato entre hojas de arce y tréboles"><figcaption>El gato ya se escondió. ¿Lo encuentras?</figcaption></figure>
+ <div>
+  <h2>Entra al bosque</h2>
+  <p>El juego está en itch.io. Descárgalo y ayuda a los gatos a esconderse bien.</p>
+  <a class="btn big itch" href="https://itch.io" target="_blank" rel="noopener">Descargar en itch.io</a>
+ </div>
+</div></section>
+
+<footer><div class="wrap">
+ <p>Colegio Técnico y Centro de Entrenamiento Vocacional de Villarrica, Paraguay · 2026</p>
+ <p>Proyecto final: «Desarrollo de software educativo para la implementación en la enseñanza interactiva».</p>
+ <p>Gracias a los artistas de itch.io cuyos recursos hicieron posible este bosque.</p>
+</div></footer>
+
+<script>
+// ▼ Pega aquí el enlace de tu juego en itch.io ▼
+const ITCH_URL = "https://itch.io";
+const IMG = {
+  k1: "images/portada.jpg",
+  k2: "images/gato-hojas.jpg",
+  k3: "images/bosque.jpg",
+  k4: "images/alice-diseno.jpg",
+  k5: "images/alice-color.jpg",
+  k6: "images/bocetos.jpg"
+};
+document.querySelectorAll(".itch").forEach(a => a.href = ITCH_URL);
+document.querySelectorAll("[data-img]").forEach(i => i.src = IMG[i.dataset.img]);
+
+// Hero + hojas
+const hero = document.getElementById("inicio"), lc = ["#e8742c","#e9b44c","#b5402a","#d9e24f","#c2410c"];
+hero.style.backgroundImage = `url(${IMG.k1})`;
+for (let i = 0; i < 16; i++) {
+  const l = document.createElement("span"); l.className = "leaf";
+  l.innerHTML = '<svg viewBox="0 0 24 24"><use href="#m"/></svg>';
+  l.style.cssText = `left:${(i*61)%100}%;width:${16+(i%4)*7}px;height:${16+(i%4)*7}px;--c:${lc[i%5]};--dx:${(i%2?1:-1)*(40+i*8)}px;animation-duration:${10+(i*5)%8}s;animation-delay:${-i*1.9}s`;
+  hero.appendChild(l);
+}
+
+// Galería
+const G = [
+ ["k1","arte","Portada del juego by @boopkbr","Alice con su farol, entre los árboles rojizos del bosque."],
+ ["k2","arte","Puma entre las hojas by @boopkbr","Un gato dormilón escondido entre hojas de arce y tréboles."],
+ ["k4","personajes","Diseño de la protagonista @anhya.zhg_","Hoja de diseño de Alice the Witch, con sus accesorios anotados."],
+ ["k5","personajes","Alice en color","Versión en marcador naranja, con corona de hojas y calabaza."],
+ ["k6","personajes","@elise_.vg095","Exploración a lápiz de poses y sombreros."],
+ ["k3","escenarios","Bosque Concepto","Marcador y lápiz: un ave en la rama, un guardián pardo y un duende con su hongo."]
+], C = [["todo","Todo"],["arte","Arte del juego"],["personajes","Personajes"],["escenarios","Escenarios"]];
+const grid = document.getElementById("grid"), chips = document.getElementById("chips"), lb = document.getElementById("lb");
+G.forEach(([k,c,t,n],i) => {
+  const b = document.createElement("button"); b.className = "sheet"; b.dataset.c = c;
+  b.style.setProperty("--r", ((i%3)-1)*1.7 + "deg");
+  b.innerHTML = `<img alt="${t}" src="${IMG[k]}"><span class="cap">${t}</span>`;
+  b.onclick = () => { lb.querySelector("img").src = IMG[k]; lb.querySelector("img").alt = t; lb.querySelector("figcaption").innerHTML = `<b>${t}.</b> ${n}`; lb.showModal(); };
+  grid.appendChild(b);
+});
+C.forEach(([v,t],i) => {
+  const b = document.createElement("button"); b.textContent = t; b.setAttribute("aria-pressed", i===0);
+  b.onclick = () => { [...chips.children].forEach(x => x.setAttribute("aria-pressed", x===b)); [...grid.children].forEach(g => g.hidden = v!=="todo" && g.dataset.c!==v); };
+  chips.appendChild(b);
+});
+document.getElementById("x").onclick = () => lb.close();
+lb.onclick = e => { if (e.target === lb) lb.close(); };
+
+// Niveles
+const L = [
+ ["Nivel 1 · Las piezas del té","Exploración del entorno e interacción con objetos: piedras, arbustos, flores, troncos y mecanismos. Un NPC cuenta la historia antes del primer puzzle.","Encontrar las 5 piezas perdidas del juego de té (tazas, platos, cucharitas, tetera y azucarera): mirar detrás de piedras y arbustos, y mover flores y troncos para armar puentes sobre los ríos.","Hay que reunir las 5 piezas para avanzar. Si te atascas, el NPC da pistas con sus diálogos."],
+ ["Nivel 2 · La carrera","Movimiento: saltar, correr y esquivar obstáculos, explicado por un NPC.","Ganar una carrera contra el guardián del bosque, que cierra el paso al siguiente nivel.","Si chocas con un obstáculo, la carrera empieza de nuevo. Al superar al guardián aparece un mensaje de victoria y se abre el siguiente nivel."],
+ ["Nivel 3 · El estanque","Planificación de rutas y cooperación con otros personajes: los sapos y su aldea.","Cruzar el gran estanque recogiendo nenúfares y saltando sobre ellos, mientras ayudas a los sapos con su aldea.","Los nenúfares colocados se quedan en su lugar y los saltos fallidos se corrigen al instante. Los sapos agradecen la ayuda."],
+ ["Nivel 4 · La telaraña","Reconocimiento de patrones y trazados (el tejido de agua y la telaraña), con razonamiento de las pistas del NPC.","Hacer 5 trazados correctos por la telaraña a pedido del ratón, para ayudarlo a terminar su labor.","El ratón valida cada trazado al momento. Si fallas, reintentas con una pista. Al completar los 5, comienza la cinemática final."]
+];
+const tabs = document.querySelector(".tabs"), panel = document.getElementById("panel");
+function show(n){
+  const d = L[n]; [...tabs.children].forEach((b,i) => b.setAttribute("aria-selected", i===n));
+  panel.innerHTML = `<div><h3>${d[0]}</h3><p>${d[1]}</p></div><div><h4>El desafío</h4><p>${d[2]}</p><h4>La respuesta del juego</h4><p>${d[3]}</p></div>`;
+}
+L.forEach((_,i) => { const b = document.createElement("button"); b.textContent = "Nivel " + (i+1); b.setAttribute("role","tab"); b.onclick = () => show(i); tabs.appendChild(b); });
+show(0);
+
+// Equipo
+const T = [
+  ["Anhia Fiorella Acosta Ramírez","Líder del proyecto y desarrollo del software.","#e8742c","images/anhia.jpg"],
+  ["Alan Yusef Bareiro Cuevas","Funcionamiento del robot, edición y apoyo en diseño.","#e9b44c","images/alan.jpg"],
+  ["Ana Paula Silvero Cáceres","Documentación y apoyo en diseño.","#7a9a3a","images/ana.jpg"],
+  ["Sol Enelia López Galeano","Funcionamiento del robot.","#d9e24f","images/sol.jpg"]
+];
+T.forEach(([n,r,c,foto]) => document.getElementById("team").insertAdjacentHTML("beforeend",
+  `<div class="sheet">
+     <div class="av" style="background:${c}">${foto ? `<img src="${foto}" alt="Foto de ${n}" onerror="this.replaceWith('${n[0]}')">` : n[0]}</div>
+     <h3>${n}</h3><p>${r}</p>
+   </div>`));
+</script>
+</body>
+</html>
