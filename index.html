@@ -205,12 +205,12 @@ footer p{margin:.3rem auto}
 // ▼ Pega aquí el enlace de tu juego en itch.io ▼
 const ITCH_URL = "https://itch.io";
 const IMG = {
-  k1: "img/portada.jpg",
-  k2: "imag/gato-hojas.jpg",
-  k3: "imag/bosque.jpg",
-  k4: "imag/alice-diseno.jpg",
-  k5: "imag/alice-color.jpg",
-  k6: "imag/bocetos.jpg"
+  k1: "images/portada.jpg",
+  k2: "images/gato-hojas.jpg",
+  k3: "images/bosque.jpg",
+  k4: "images/alice-diseno.jpg",
+  k5: "images/alice-color.jpg",
+  k6: "images/bocetos.jpg"
 };
 document.querySelectorAll(".itch").forEach(a => a.href = ITCH_URL);
 document.querySelectorAll("[data-img]").forEach(i => i.src = IMG[i.dataset.img]);
